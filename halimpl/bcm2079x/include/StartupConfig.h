@@ -22,12 +22,12 @@
  ******************************************************************************/
 
 #pragma once
-#include <string>
+#include <vector>
 #include "bt_types.h"
 
 class StartupConfig {
  public:
-  typedef std::basic_string<uint8_t> uint8_string;
+  typedef std::vector<uint8_t> uint8_string;
   StartupConfig();
 
   /*******************************************************************************

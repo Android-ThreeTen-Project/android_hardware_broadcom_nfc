@@ -38,7 +38,7 @@ const uint8_t StartupConfig::mMaxLength = 255;
 *******************************************************************************/
 StartupConfig::StartupConfig() {
   // set first byte to 0, which is length of payload
-  mBuffer.append((uint8_string::size_type)1, (uint8_string::value_type)0);
+  mBuffer.push_back(0);
 }
 
 /*******************************************************************************
@@ -53,7 +53,7 @@ StartupConfig::StartupConfig() {
 void StartupConfig::initialize() {
   mBuffer.clear();
   // set first byte to 0, which is length of payload
-  mBuffer.append((uint8_string::size_type)1, (uint8_string::value_type)0);
+  mBuffer.push_back(0);
 }
 
 /*******************************************************************************
@@ -90,7 +90,7 @@ bool StartupConfig::append(const uint8_t* newContent, uint8_t newContentLen) {
   ALOGD("%s: try append %zu bytes", fn,
         (uint8_string::size_type)(newContentLen));
   // append new payload into private buffer
-  mBuffer.append(newContent + 1, (uint8_string::size_type)(newContentLen - 1));
+  mBuffer.insert(mBuffer.end(), newContent + 1, newContent + newContentLen);
   // increase size counter of payload in private buffer
   mBuffer[0] = mBuffer[0] + newContentLen - 1;
   ALOGD("%s: new size %u bytes", fn, mBuffer[0]);
